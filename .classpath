@@ -8,9 +8,9 @@
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
+			<attribute name="test" value="true"/>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
@@ -28,5 +28,12 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="E:/tools/fastjson/fastjson-1.2.9.jar"/>
+	<classpathentry kind="lib" path="E:/tools/java中转json/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="E:/tools/java中转json/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="E:/tools/java中转json/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="E:/tools/java中转json/commons-logging.jar"/>
+	<classpathentry kind="lib" path="E:/tools/java中转json/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="E:/tools/java中转json/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
