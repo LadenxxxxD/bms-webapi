@@ -15,9 +15,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean checkPassword(String id, String password) {
-
+		
+		System.out.println("impl id:"+id);
 		User user = userDao.findById(id);
 		if (user != null && password.equals(user.getPassword())) {
+			System.out.println(user.getAuthority());
+			System.out.println(user.getComment());
+			System.out.println(user.getDescription());
+			System.out.println(user.getEmail());
+			System.out.println(user.getGrade());
+			System.out.println(user.getInterest());
+			System.out.println(user.getPassword());
+			System.out.println(user.getSex());
+			System.out.println(user.getUserid());
+			System.out.println(user.getUsername());
+			System.out.println(user.getBirthday());
+			System.out.println(user.getClass());
 			return true;
 		}
 		return false;

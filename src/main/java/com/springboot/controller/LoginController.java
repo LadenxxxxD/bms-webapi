@@ -20,10 +20,11 @@ public class LoginController {
 	@RequestMapping(value = "/login")
 	@ResponseBody
 	public boolean login(HttpServletRequest request) {
-
+		
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-
+		System.out.println(userId);
+		System.out.println(password);
 		boolean result = service.checkPassword(userId, password);
 		if (result) {
 			return result;
