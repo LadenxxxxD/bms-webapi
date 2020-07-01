@@ -5,14 +5,17 @@
 		resultType="com.springboot.entity.Book">
 		select * from t_book
 	</select>
-
+ 
 	<select id="findBooksByUser"
 		resultType="com.springboot.entity.Book"
 		parameterType="java.lang.String">
 		select * from t_book
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="bookId != ''">
+				book_id = #{bookId}
+			</if>
 			<if test="authorName != ''">
-				author_name like '%${authorName}%'
+				AND author_name like '%${authorName}%'
 			</if>
 			<if test="bookName != ''">
 				AND book_name like '%${bookName}%'
@@ -54,4 +57,8 @@
 		parameterType="java.lang.String">
 		select quantity from t_book where book_id = #{bookId}
 	</select>
+	
+	<insert id="addBook" parameterType="com.springboot.entity.Book">
+	insert into t_book (book_id,author_name,education_name,book_name,quantity,book_img) values (#{book.bookId},#{book.authorName},#{book.educationName},#{book.bookName},#{book.quantity},#{book.bookImg})
+	</insert>
 </mapper>

@@ -26,8 +26,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> queryBookByUser(String authorName, String bookName, String educationName) {
-		List<Book> books = bookDao.findBooksByUser(authorName, bookName, educationName);
+	public List<Book> queryBookByUser(String bookId, String authorName, String bookName, String educationName) {
+		List<Book> books = bookDao.findBooksByUser(bookId, authorName, bookName, educationName);
 		return books;
 	}
 
@@ -67,5 +67,20 @@ public class BookServiceImpl implements BookService {
 		} else {//剩余书的数目<0
 			return false;			
 		}
+	}
+
+	@Override
+	public boolean addBook(Book book) {
+		try {
+			int count = bookDao.addBook(book);
+			if(count != 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
+		
+		
 	}
 }
