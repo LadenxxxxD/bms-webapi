@@ -20,32 +20,8 @@ public class BookServiceImpl implements BookService {
 	BookDao bookDao;
 
 	@Override
-	public List<Book> getBooksAll() {
-		List<Book> books = bookDao.findBooksAll();
-		return books;
-	}
-
-	@Override
 	public List<Book> queryBookByUser(String bookId, String authorName, String bookName, String educationName) {
 		List<Book> books = bookDao.findBooksByUser(bookId, authorName, bookName, educationName);
-		return books;
-	}
-
-	@Override
-	public List<Book> queryBookByAuthorName(String authorName) {
-		List<Book> books = bookDao.findBooksByAuthor(authorName);
-		return books;
-	}
-
-	@Override
-	public List<Book> queryBookByBookName(String bookName) {
-		List<Book> books = bookDao.findBooksByBookName(bookName);
-		return books;
-	}
-
-	@Override
-	public List<Book> queryBookByEducationName(String educationName) {
-		List<Book> books = bookDao.findBooksByEducationName(educationName);
 		return books;
 	}
 

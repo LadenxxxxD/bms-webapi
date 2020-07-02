@@ -32,15 +32,7 @@ public class QueryController {
 
 	private List<Book> books = new ArrayList<Book>();
 
-	// 查询所有书籍
-	@PostMapping(value = "/queryUser/queryBooks")
-	@ResponseBody
-	public List<Book> queryBooks(HttpServletRequest request) {
-		books = bookService.getBooksAll();
-		return books;
-	}
-
-	// 用户自定义查询
+	// 用户自定义查询 可查图书id 作者 书名 出版社 查询所有图书
 	@PostMapping(value = "/queryUser/queryBookByUser")
 	@ResponseBody
 	public List<Book> queryBooksByUser(@RequestBody String queryInfo) {
@@ -48,30 +40,6 @@ public class QueryController {
 		System.out.println(obj.get("bookId").toString());
 		books = bookService.queryBookByUser(obj.get("bookId").toString(), obj.get("authorName").toString(), obj.get("bookName").toString(),
 				obj.get("educationName").toString());
-		return books;
-	}
-
-	@PostMapping(value = "/queryUser/queryBookByAuthor")
-	@ResponseBody
-	public List<Book> queryBookByAuthorName(@RequestBody String authorName) {
-		JSONObject obj = JSONObject.fromObject(authorName);
-		books = bookService.queryBookByAuthorName(obj.get("authorName").toString());
-		return books;
-	}
-
-	@PostMapping(value = "/queryUser/queryBookByBookName")
-	@ResponseBody
-	public List<Book> queryBookByBookName(@RequestBody String bookName) {
-		JSONObject obj = JSONObject.fromObject(bookName);
-		books = bookService.queryBookByBookName(obj.get("bookName").toString());
-		return books;
-	}
-
-	@PostMapping(value = "/queryUser/queryBookByEducationName")
-	@ResponseBody
-	public List<Book> queryBookByEducationName(@RequestBody String educationName) {
-		JSONObject obj = JSONObject.fromObject(educationName);
-		books = bookService.queryBookByEducationName(obj.get("educationName").toString());
 		return books;
 	}
 
@@ -92,7 +60,7 @@ public class QueryController {
 		return stat;
 	}
 
-	// 上传图书 用的时候
+	// 上传图书 json格式的 用的时候记得改下url
 	@PostMapping(value = "/queryUser/uploadBookInfo")
 	@ResponseBody
 	public boolean uploadBookInfo(@RequestBody String bookInfo) {
@@ -103,7 +71,7 @@ public class QueryController {
 		book.setBookImg(obj.get("bookImg").toString());
 		book.setBookName(obj.get("bookName").toString());
 		book.setEducationName(obj.get("educationName").toString());
-		book.setQuantity(20);
+		book.setQuantity((int) obj.get("quantity"));// 可能有数据类型的问题 你试试
 		boolean stat = bookService.addBook(book);
 		return stat;
 	}
