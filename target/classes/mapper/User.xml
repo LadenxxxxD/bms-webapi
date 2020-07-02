@@ -18,4 +18,16 @@
     from t_user
     where user_id = #{userid}
   </select>
+
+  <!--useGenerateKeys="true"  resultMap="LogResultMap" -->
+  <insert id="registerLogById"  parameterType="java.lang.String" timeout="20" keyProperty="user_id" >
+  insert into t_log(user_id,user_name,description)
+  values(#{user_id},#{user_name},#{description})
+  </insert>
+  
+  <insert id="addUser"  parameterType="User" timeout="20" keyProperty="user_id" >
+  insert into t_user(user_id,user_name,password,description,authority,email,birthday,sex,grade,interest,comment)
+  values(#{user_id},#{user_name},#{password},#{description},#{authority},#{email},#{birthday},#{sex},#{grade},#{interest},#{comment})
+  </insert>
+
 </mapper>
