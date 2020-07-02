@@ -17,32 +17,15 @@ public class BookServiceImpl implements BookService {
 	BookDao bookDao;
 
 	@Override
-	public List<Book> getBooksAll() {
-		List<Book> books = bookDao.findBooksAll();
+	public List<Book> queryBooks(String bookId, String authorName, String bookName, String educationName) {
+		// TODO Auto-generated method stub
+		List<Book> books = bookDao.findBooksByUser(bookId, authorName, bookName, educationName);
 		return books;
 	}
 
 	@Override
-	public List<Book> queryBookByUser(String authorName, String bookName, String educationName) {
-		List<Book> books = bookDao.findBooksByUser(authorName, bookName, educationName);
-		return books;
-	}
-
-	@Override
-	public List<Book> queryBookByAuthorName(String authorName) {
-		List<Book> books = bookDao.findBooksByAuthor(authorName);
-		return books;
-	}
-
-	@Override
-	public List<Book> queryBookByBookName(String bookName) {
-		List<Book> books = bookDao.findBooksByBookName(bookName);
-		return books;
-	}
-
-	@Override
-	public List<Book> queryBookByEducationName(String educationName) {
-		List<Book> books = bookDao.findBooksByEducationName(educationName);
+	public List<Book> queryBookByUser(String bookId, String authorName, String bookName, String educationName) {
+		List<Book> books = bookDao.findBooksByUser(bookId, authorName, bookName, educationName);
 		return books;
 	}
 
@@ -65,4 +48,19 @@ public class BookServiceImpl implements BookService {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean addBook(Book book) {
+		try {
+			int count = bookDao.addBook(book);
+			if (count != 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
+
+	}
+
 }

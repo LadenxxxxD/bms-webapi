@@ -7,6 +7,16 @@ public class Book {
 	private String bookName;
 	private int quantity;
 	private String delete_flg;
+	private String bookImg;
+	
+
+	public String getBookImg() {
+		return bookImg;
+	}
+
+	public void setBookImg(String bookImg) {
+		this.bookImg = bookImg;
+	}
 
 	public String getBookId() {
 		return bookId;

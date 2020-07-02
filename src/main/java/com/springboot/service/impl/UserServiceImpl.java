@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean addUser(User user) {
-		// TODO Auto-generated method stub
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		java.util.Date date = new java.util.Date();
 		String nowTime = sdf.format(date);

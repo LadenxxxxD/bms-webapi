@@ -5,18 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.springboot.entity.Book;
 import com.springboot.entity.Rental;
 import com.springboot.service.BookService;
+import com.springboot.service.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import net.sf.json.JSONObject;
 
@@ -26,49 +27,33 @@ public class QueryController {
 
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private UserService userService;
 
 	private List<Book> books = new ArrayList<Book>();
 
-	// 查询所有书籍
-	@PostMapping(value = "/queryUser/queryBooks")
-	@ResponseBody
-	public List<Book> queryBooks(HttpServletRequest request) {
-		books = bookService.getBooksAll();
-		return books;
-	}
+	// 用户自定义查询 可查图书id 作者 书名 出版社 查询所有图书
+	// @PostMapping(value = "/queryUser/queryBooks")
+	// @ResponseBody
+	// public List<Book> queryBooksByUser(@RequestBody String queryInfo) {
+	// JSONObject obj = JSONObject.fromObject(queryInfo);
+	// System.out.println(obj.get("bookId").toString());
+	// books = bookService.queryBookByUser(obj.get("bookId").toString(),
+	// obj.get("authorName").toString(),
+	// obj.get("bookName").toString(), obj.get("educationName").toString());
+	// return books;
+	// }
 
-	// 用户自定义查询
-	@PostMapping(value = "/queryUser/queryBookByUser")
+	// 根据条件查询
+	@GetMapping("/query")
 	@ResponseBody
-	public List<Book> queryBookByUser(@RequestBody String queryInfo) {
-		JSONObject obj = JSONObject.fromObject(queryInfo);
-		books = bookService.queryBookByUser(obj.get("authorName").toString(), obj.get("bookName").toString(),
-				obj.get("educationName").toString());
-		return books;
-	}
+	public List<Book> queryBooks(@RequestParam(value = "bookId", required = false, defaultValue = "") String bookId,
+			@RequestParam(value = "authorName", required = false, defaultValue = "") String authorName,
+			@RequestParam(value = "bookName", required = false, defaultValue = "") String bookName,
+			@RequestParam(value = "educationName", required = false, defaultValue = "") String educationName) {
 
-	@PostMapping(value = "/queryUser/queryBookByAuthor")
-	@ResponseBody
-	public List<Book> queryBookByAuthorName(@RequestBody String authorName) {
-		JSONObject obj = JSONObject.fromObject(authorName);
-		books = bookService.queryBookByAuthorName(obj.get("authorName").toString());
-		return books;
-	}
-
-	@PostMapping(value = "/queryUser/queryBookByBookName")
-	@ResponseBody
-	public List<Book> queryBookByBookName(@RequestBody String bookName) {
-		JSONObject obj = JSONObject.fromObject(bookName);
-		books = bookService.queryBookByBookName(obj.get("bookName").toString());
-		return books;
-	}
-
-	@PostMapping(value = "/queryUser/queryBookByEducationName")
-	@ResponseBody
-	public List<Book> queryBookByEducationName(@RequestBody String educationName) {
-		JSONObject obj = JSONObject.fromObject(educationName);
-		books = bookService.queryBookByEducationName(obj.get("educationName").toString());
-		return books;
+		return bookService.queryBooks(bookId, authorName, bookName, educationName);
+		// return books;
 	}
 
 	// 点击借阅更新书的数目
@@ -87,4 +72,21 @@ public class QueryController {
 		boolean stat = bookService.updateBookCount(rental);
 		return stat;
 	}
+
+	// 上传图书 json格式的 用的时候记得改下url
+	@PostMapping(value = "/queryUser/uploadBookInfo")
+	@ResponseBody
+	public boolean uploadBookInfo(@RequestBody String bookInfo) {
+		JSONObject obj = JSONObject.fromObject(bookInfo);
+		Book book = new Book();
+		book.setAuthorName(obj.get("authorName").toString());
+		book.setBookId(obj.get("bookId").toString());
+		book.setBookImg(obj.get("bookImg").toString());
+		book.setBookName(obj.get("bookName").toString());
+		book.setEducationName(obj.get("educationName").toString());
+		book.setQuantity((int) obj.get("quantity"));// 可能有数据类型的问题 你试试
+		boolean stat = bookService.addBook(book);
+		return stat;
+	}
+
 }
