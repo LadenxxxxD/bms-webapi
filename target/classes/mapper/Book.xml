@@ -26,16 +26,26 @@
 	</update>
 	
 	<insert id="insertRental" parameterType="com.springboot.entity.Rental">
-	insert into t_rental (user_id,book_id,rental_datetime) values (#{rental.userId},#{rental.bookId},#{rental.rentalDatetime})
+		insert into t_rental (user_id,book_id,rental_datetime) values (#{rental.userId},#{rental.bookId},#{rental.rentalDatetime})
 	</insert>
 	
-	<select id="findQuantityByBookId"
-		resultType="int"
-		parameterType="java.lang.String">
+	<select id="findQuantityByBookId" resultType="int" parameterType="java.lang.String">
 		select quantity from t_book where book_id = #{bookId}
 	</select>
 	
 	<insert id="addBook" parameterType="com.springboot.entity.Book">
 	insert into t_book (book_id,author_name,education_name,book_name,quantity,book_img) values (#{book.bookId},#{book.authorName},#{book.educationName},#{book.bookName},#{book.quantity},#{book.bookImg})
 	</insert>
+
+	<update id="updateBook" parameterType="com.springboot.entity.Book">
+		UPDATE t_book SET book_name = #{book.bookName},
+			author_name = #{book.authorName},
+			education_name = #{book.educationName},
+			quantity = #{book.quantity}
+		WHERE book_id = #{book.bookId};
+	</update>
+
+	<delete id="deleteBook" parameterType="java.lang.String">
+		DELETE FROM t_book WHERE book_id = #{bookId}
+	</delete>
 </mapper>

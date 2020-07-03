@@ -14,7 +14,6 @@ public class ReturnBookServiceImpl implements ReturnBookService {
 
 	@Override
 	public boolean returnBookCheck(String userId, String bookId) {
-		// TODO Auto-generated method stub
 		if (rbDao.ReturnBook(userId, bookId)) {
 			return true;
 		} else {

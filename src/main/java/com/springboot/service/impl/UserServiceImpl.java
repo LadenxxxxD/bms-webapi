@@ -47,9 +47,8 @@ public class UserServiceImpl implements UserService {
 		if (result) {
 			System.out.println("add User sucess------------------------------------------------------------------");
 			return true;
-		} else {
-			System.out.println("add User fail------------------------------------------------------------------");
 		}
+		System.out.println("add User fail------------------------------------------------------------------");
 		return false;
 	}
 

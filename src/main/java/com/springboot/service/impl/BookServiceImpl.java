@@ -18,13 +18,6 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> queryBooks(String bookId, String authorName, String bookName, String educationName) {
-		// TODO Auto-generated method stub
-		List<Book> books = bookDao.findBooksByUser(bookId, authorName, bookName, educationName);
-		return books;
-	}
-
-	@Override
-	public List<Book> queryBookByUser(String bookId, String authorName, String bookName, String educationName) {
 		List<Book> books = bookDao.findBooksByUser(bookId, authorName, bookName, educationName);
 		return books;
 	}
@@ -52,15 +45,26 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public boolean addBook(Book book) {
 		try {
-			int count = bookDao.addBook(book);
-			if (count != 0) {
-				return true;
-			}
+			return bookDao.addBook(book) > 0;
 		} catch (Exception e) {
+			System.out.println(e);
 			return false;
 		}
-		return false;
+	}
 
+	@Override
+	public boolean updateBook(Book book) {
+		try {
+			return bookDao.updateBook(book) > 0;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteBook(String bookId) {
+		return this.bookDao.deleteBook(bookId) > 0;
 	}
 
 }
