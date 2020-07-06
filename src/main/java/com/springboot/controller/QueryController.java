@@ -5,9 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.springboot.entity.Book;
+import com.springboot.entity.BookRankList;
 import com.springboot.entity.Rental;
+import com.springboot.entity.UserRankList;
 import com.springboot.service.BookService;
+import com.springboot.service.RankListService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +36,11 @@ public class QueryController {
 
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private RankListService ranklistService;
+	
+	private List<UserRankList> userRankList = new ArrayList<UserRankList>();
+	private List<BookRankList> bookRankList = new ArrayList<BookRankList>();
 
 	// 根据条件查询
 	@GetMapping("/query")
@@ -92,5 +102,21 @@ public class QueryController {
 		// System.out.println(book.getQuantity());
 		return bookService.addBook(book);
 	}
+	
+	// 查询当月读者排行榜
+		@PostMapping(value = "/queryRankingList/queryUserRL")
+		@ResponseBody
+		public List<UserRankList> queryUserRL(HttpServletRequest request) {
+			userRankList = ranklistService.getUserRankList();
+			return userRankList;
+		}
+
+		// 查询当月热门图书
+		@PostMapping(value = "/queryRankingList/queryBookRL")
+		@ResponseBody
+		public List<BookRankList> queryBookRL(HttpServletRequest request) {
+			bookRankList = ranklistService.getBookRankList();
+			return bookRankList;
+		}
 
 }
