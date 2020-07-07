@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.springboot.entity.Book;
 import com.springboot.entity.BookRankList;
 import com.springboot.entity.Rental;
+import com.springboot.entity.UploadedFile;
 import com.springboot.entity.UserRankList;
 import com.springboot.service.BookService;
 import com.springboot.service.RankListService;
@@ -26,19 +27,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import net.sf.json.JSONObject;
 
 @CrossOrigin(origins = { "http://localhost:4200", "null" })
 @RequestMapping("/api/books")
 @RestController
-public class QueryController {
+public class BookController {
 
 	@Autowired
 	private BookService bookService;
 	@Autowired
 	private RankListService ranklistService;
-	
+
 	private List<UserRankList> userRankList = new ArrayList<UserRankList>();
 	private List<BookRankList> bookRankList = new ArrayList<BookRankList>();
 
@@ -102,21 +104,41 @@ public class QueryController {
 		// System.out.println(book.getQuantity());
 		return bookService.addBook(book);
 	}
-	
-	// 查询当月读者排行榜
-		@PostMapping(value = "/queryRankingList/queryUserRL")
-		@ResponseBody
-		public List<UserRankList> queryUserRL(HttpServletRequest request) {
-			userRankList = ranklistService.getUserRankList();
-			return userRankList;
-		}
 
-		// 查询当月热门图书
-		@PostMapping(value = "/queryRankingList/queryBookRL")
-		@ResponseBody
-		public List<BookRankList> queryBookRL(HttpServletRequest request) {
-			bookRankList = ranklistService.getBookRankList();
-			return bookRankList;
+	// TODO 上传图片
+	// 前端需要的Json样例：
+	// {
+	// "name": "xxx.png",
+	// "status": "done",
+	// "url":"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+	// "thumbUrl":"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+	// }
+	@PostMapping(value = "/uploadBookImg")
+	@ResponseBody
+	public UploadedFile uploadBookImg(@RequestParam("file") MultipartFile file) {
+
+		if (file == null) {
+			System.out.println("没有读取到文件");
+			return new UploadedFile("", "failed", "");
+		} else {
+			return this.bookService.uploadBookImg(file);
 		}
+	}
+
+	// 查询当月读者排行榜
+	@PostMapping(value = "/queryRankingList/queryUserRL")
+	@ResponseBody
+	public List<UserRankList> queryUserRL(HttpServletRequest request) {
+		userRankList = ranklistService.getUserRankList();
+		return userRankList;
+	}
+
+	// 查询当月热门图书
+	@PostMapping(value = "/queryRankingList/queryBookRL")
+	@ResponseBody
+	public List<BookRankList> queryBookRL(HttpServletRequest request) {
+		bookRankList = ranklistService.getBookRankList();
+		return bookRankList;
+	}
 
 }
