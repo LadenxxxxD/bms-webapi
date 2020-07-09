@@ -11,12 +11,23 @@
   <sql id="Base_Column_List">
     user_id, user_name, password, description
   </sql>
-
+ 
+  <sql id="Senior_Column_List">
+    user_id, user_name, password, description, authority, email, birthday, grade, interest, comment
+  </sql>
+  
   <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />
     from t_user
     where user_id = #{userid}
+  </select>
+  
+  <select id="findByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Senior_Column_List" />
+    from t_user
+    where user_name = #{userName}
   </select>
 
   <!--useGenerateKeys="true"  resultMap="LogResultMap" -->

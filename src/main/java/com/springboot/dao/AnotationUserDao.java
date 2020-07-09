@@ -23,11 +23,11 @@ public interface AnotationUserDao {
 	// @Result(property = "description", column = "description"),
 	// })
 	User findById(@Param("userid") String userid);
-
+	User findByUsername(@Param("userName") String userName);
 	boolean registerLogById(@Param("user_id") String userid, @Param("user_name") String username,
 			@Param("description") String description);
 
-	boolean addUser(@Param("user_id") String userid, @Param("user_name") String username,
+	boolean addUser(@Param("user_id") int userid, @Param("user_name") String username,
 			@Param("password") String password, @Param("description") String description,
 			@Param("authority") String authority, @Param("email") String email, @Param("birthday") LocalDate birthday,
 			@Param("sex") String sex, @Param("grade") String grade, @Param("interest") String interest,

@@ -21,13 +21,15 @@ public class UserServiceImpl implements UserService {
 	User user = new User();
 
 	@Override
-	public boolean checkPassword(String id, String password) {
+	public String checkPassword(String userName, String password) {
 
-		user = userDao.findById(id);
+		user = userDao.findByUsername(userName);
 		if (user != null && password.equals(user.getPassword())) {
-			return true;
+			String authority = user.getAuthority();
+			System.out.println(authority);
+			return authority;
 		}
-		return false;
+		return null;
 	}
 
 	@Override
@@ -50,6 +52,12 @@ public class UserServiceImpl implements UserService {
 		}
 		System.out.println("add User fail------------------------------------------------------------------");
 		return false;
+	}
+	
+	@Override
+	public int getUserId(String userName) {
+		int userId = userDao.findByUsername(userName).getUserid();
+		return userId;
 	}
 
 }
