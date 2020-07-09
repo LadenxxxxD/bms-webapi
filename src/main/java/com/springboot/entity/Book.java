@@ -6,9 +6,9 @@ public class Book {
 	private String educationName;
 	private String bookName;
 	private int quantity;
-	private String delete_flg;
+	private String deleteFlag;
 	private String bookImg;
-	
+	private String bookDescription;
 
 	public String getBookImg() {
 		return bookImg;
@@ -59,10 +59,18 @@ public class Book {
 	}
 
 	public String getDelete_flg() {
-		return delete_flg;
+		return deleteFlag;
 	}
 
-	public void setDelete_flg(String delete_flg) {
-		this.delete_flg = delete_flg;
+	public void setDelete_flg(String deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
+	public String getBookDescription() {
+		return bookDescription;
+	}
+
+	public void setBookDescription(String bookDescription) {
+		this.bookDescription = bookDescription;
 	}
 }

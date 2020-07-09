@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +21,9 @@ public class ReturnBookController {
 
 	@PostMapping("/returnbook")
 	@ResponseBody
-	public boolean login(@RequestBody ReturnBook returnBook,HttpServletRequest request) {
+	public boolean login(@RequestBody ReturnBook returnBook, HttpServletRequest request) {
 
-		boolean result = rbService.returnBookCheck(returnBook.getUserId(),returnBook.getBookId());
+		boolean result = rbService.returnBookCheck(returnBook.getUserId(), returnBook.getBookId());
 		if (result) {
 			return result;
 		}
