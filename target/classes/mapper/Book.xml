@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.springboot.dao.BookDao">
@@ -34,14 +35,18 @@
 	</select>
 	
 	<insert id="addBook" parameterType="com.springboot.entity.Book">
-	insert into t_book (book_id,author_name,education_name,book_name,quantity,book_img) values (#{book.bookId},#{book.authorName},#{book.educationName},#{book.bookName},#{book.quantity},#{book.bookImg})
+	insert into t_book (book_id,author_name,education_name,book_name,quantity,book_img,book_description) 
+		values (#{book.bookId},#{book.authorName},#{book.educationName},#{book.bookName},#{book.quantity},#{book.bookImg},#{book.bookDescription})
 	</insert>
 
 	<update id="updateBook" parameterType="com.springboot.entity.Book">
-		UPDATE t_book SET book_name = #{book.bookName},
+		UPDATE t_book SET 
+			book_name = #{book.bookName},
 			author_name = #{book.authorName},
 			education_name = #{book.educationName},
-			quantity = #{book.quantity}
+			quantity = #{book.quantity},
+			book_img = #{book.bookImg},
+			book_description = #{book.bookDescription}
 		WHERE book_id = #{book.bookId};
 	</update>
 

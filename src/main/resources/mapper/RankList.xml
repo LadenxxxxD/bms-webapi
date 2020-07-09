@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.dao.RankListDao">
+	<resultMap id="UserRLMap"
+		type="com.springboot.entity.UserRankList">
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="COUNT(book_id)" property="countLentNum" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="getUserRankList" resultMap="UserRLMap">
+		SELECT
+		r.user_id,u.user_name,COUNT(book_id) FROM t_rental r
+		Right JOIN t_user
+		u
+		ON r.user_id = u.user_id
+		WHERE DATE_FORMAT(r.rental_datetime,'%Y%m') =
+		DATE_FORMAT(NOW(),'%Y%m')
+		GROUP BY user_id order by count(book_id) DESC
+	</select>
+
+
+	<resultMap id="BookRLMap"
+		type="com.springboot.entity.BookRankList">
+		<result column="b.book_name" property="bookName" jdbcType="VARCHAR" />
+		<result column="b.author_name" property="authorName" jdbcType="VARCHAR" />
+		<result column="COUNT(rental_datetime)" property="countLentNum" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="getBookRankList" resultMap="BookRLMap">
+		SELECT
+		b.book_name,b.author_name,COUNT(rental_datetime) FROM t_rental r
+		Right JOIN t_book b
+		ON r.book_id = b.book_id
+		WHERE DATE_FORMAT(r.rental_datetime,'%Y%m') = DATE_FORMAT(NOW(),'%Y%m')
+		GROUP BY r.book_id order by count(rental_datetime) DESC
+	</select>
+
+
+
+
+
+
+</mapper>
