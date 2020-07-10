@@ -1,7 +1,6 @@
 package com.springboot.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,23 +11,20 @@ import com.springboot.service.RankListService;
 
 @Service
 public class RankListServiceImpl implements RankListService {
-	
+
 	@Autowired
 	RankListDao ranklistDao;
-	
+
 	@Override
 	public List<UserRankList> getUserRankList() {
 		List<UserRankList> userRankList = ranklistDao.getUserRankList();
-		System.out.println(userRankList.toString());
 		return userRankList;
 	}
 
 	@Override
 	public List<BookRankList> getBookRankList() {
 		List<BookRankList> bookRankList = ranklistDao.getBookRankList();
-		System.out.println(bookRankList.toString());
 		return bookRankList;
 	}
-	
-	
+
 }

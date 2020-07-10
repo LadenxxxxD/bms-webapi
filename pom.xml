@@ -29,11 +29,11 @@
             <artifactId>jjwt</artifactId>
             <version>${jjwt.version}</version>
         </dependency>
-           <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
         <dependency>
-             <groupId>joda-time</groupId>
-             <artifactId>joda-time</artifactId>
-             <version>${joda-time.version}</version>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
         </dependency>
         <dependency>
         <groupId>javax.xml.bind</groupId>
