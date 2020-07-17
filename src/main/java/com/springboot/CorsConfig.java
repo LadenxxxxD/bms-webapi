@@ -23,7 +23,11 @@ public class CorsConfig implements WebMvcConfigurer {
 	 public void addInterceptors(InterceptorRegistry registry) {
 	 // 拦截路径可自行配置多个 可用 ，分隔开
 	 registry.addInterceptor(new
-	 JwtInterceptor()).addPathPatterns("/**").excludePathPatterns("/login").excludePathPatterns("/register").excludePathPatterns("/checkToken");
+	 JwtInterceptor()).addPathPatterns("/**")
+	 .excludePathPatterns("/login")
+	 .excludePathPatterns("/register")
+	 .excludePathPatterns("/checkToken")
+	 .excludePathPatterns("/checkUserThere");
 	 }
 
 }

@@ -10,4 +10,5 @@ public interface UserService {
 	public boolean addUser(User user);
 	// public List<User> getAll();
 	public int getUserId(String userName);
+	public boolean checkUserThere(String userName);
 }

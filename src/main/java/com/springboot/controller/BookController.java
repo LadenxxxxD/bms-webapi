@@ -58,16 +58,15 @@ public class BookController {
 	// 点击借阅更新书的数目
 	@PostMapping(value = "/lent")
 	@ResponseBody
-	public boolean lent(@RequestBody String lent) {
-		JSONObject obj = JSONObject.fromObject(lent);
+	public boolean lent(@RequestBody Rental rental) {
+		System.out.println(rental.getUserId());
+		System.out.println(rental.getBookId());
 		Timestamp time = new Timestamp(System.currentTimeMillis()); // 获取系统当前时间
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String timeStr = df.format(time);
 		time = Timestamp.valueOf(timeStr);
-		Rental rental = new Rental();
-		rental.setUserId(obj.get("userId").toString());
-		rental.setBookId(obj.get("bookId").toString());
 		rental.setRentalDatetime(time);
+		System.out.println(rental.getRentalDatetime());
 		boolean stat = bookService.updateBookCount(rental);
 		return stat;
 	}

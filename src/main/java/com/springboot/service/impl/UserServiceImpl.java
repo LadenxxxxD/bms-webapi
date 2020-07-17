@@ -59,5 +59,19 @@ public class UserServiceImpl implements UserService {
 		int userId = userDao.findByUsername(userName).getUserid();
 		return userId;
 	}
+	
+	@Override
+	public boolean checkUserThere(String userName) {
+		// TODO Auto-generated method stub
+		user = userDao.findByUsername(userName);
+		System.out.println(userName);
+		System.out.println(user);
+		if (user != null) {
+			String authority = user.getAuthority();
+			return true;
+		}
+		
+		return false;
+	}
 
 }
