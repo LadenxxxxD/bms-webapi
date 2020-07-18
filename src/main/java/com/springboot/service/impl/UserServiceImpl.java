@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		user = userDao.findByUsername(userName);
 		if (user != null && password.equals(user.getPassword())) {
 			String authority = user.getAuthority();
-			System.out.println(authority);
+//			System.out.println(authority);
 			return authority;
 		}
 		return null;
