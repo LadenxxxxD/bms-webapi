@@ -19,14 +19,12 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// 获取请求头信息authorization信息
-		response.setHeader("Access-Control-Allow-Origin", "*"); // request.getHeader("Origin")
-		response.setHeader("Access-Control-Allow-Credentials", "true");
 		String a = request.getHeader("a");
-		System.out.println("aaaaaaaaaaaaaaaaaa:" + a);
+		// System.out.println("aaaaaaaaaaaaaaaaaa:" + a);
 		Claims claims = JWTUtil.parseToken(a, "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=");
 		if (claims == null) {
-			// 若判断是555则跳转至登录页面
-			response.setStatus(555);
+			// 若判断是322则跳转至登录页面
+			response.setStatus(322);
 			return false;
 		}
 		return true;

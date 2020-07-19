@@ -45,8 +45,8 @@ public class JWTUtil {
 
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
-        long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
+        // long nowMillis = System.currentTimeMillis();
+        // Date now = new Date(nowMillis);
 
         // 添加构成JWT的参数
         JwtBuilder builder = Jwts.builder()

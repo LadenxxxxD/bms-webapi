@@ -18,11 +18,13 @@ public class LogServiceImpl implements LogService {
 
 	@Override
 	public List<BookLog> getBookLog() {
+		// TODO Auto-generated method stub
 		return lDao.getBookLog();
 	}
 
 	@Override
 	public List<LoginLog> getLoginLog() {
+		// TODO Auto-generated method stub
 		return lDao.getLoginLog();
 	}
 

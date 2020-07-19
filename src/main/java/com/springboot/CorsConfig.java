@@ -11,15 +11,20 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 public class CorsConfig implements WebMvcConfigurer {
+
+	//
 	// @Override
-	// public void addInterceptors(InterceptorRegistry registry) {
-	// // 拦截路径可自行配置多个 可用 ，分隔开
-	// registry.addInterceptor(new
-	// JwtInterceptor()).addPathPatterns("/**").excludePathPatterns("/login");
+	// public void addCorsMappings(CorsRegistry registry) {
+	// registry.addMapping("/**").allowedOrigins("*").allowCredentials(true).allowedMethods("*").maxAge(3600
+	// * 24);
 	// }
 
 	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*").allowCredentials(true).allowedMethods("*").maxAge(3600 * 24);
+	public void addInterceptors(InterceptorRegistry registry) {
+		// 拦截路径可自行配置多个 可用 ，分隔开
+		registry.addInterceptor(new JwtInterceptor()).addPathPatterns("/**").excludePathPatterns("/login")
+				.excludePathPatterns("/register").excludePathPatterns("/checkToken")
+				.excludePathPatterns("/checkUserThere");
 	}
+
 }

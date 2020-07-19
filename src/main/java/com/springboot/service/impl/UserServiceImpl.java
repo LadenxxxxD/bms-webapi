@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		user = userDao.findByUsername(userName);
 		if (user != null && password.equals(user.getPassword())) {
 			String authority = user.getAuthority();
-			System.out.println(authority);
+//			System.out.println(authority);
 			return authority;
 		}
 		return null;
@@ -58,6 +58,20 @@ public class UserServiceImpl implements UserService {
 	public int getUserId(String userName) {
 		int userId = userDao.findByUsername(userName).getUserid();
 		return userId;
+	}
+	
+	@Override
+	public boolean checkUserThere(String userName) {
+		// TODO Auto-generated method stub
+		user = userDao.findByUsername(userName);
+		System.out.println(userName);
+		System.out.println(user);
+		if (user != null) {
+			String authority = user.getAuthority();
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override

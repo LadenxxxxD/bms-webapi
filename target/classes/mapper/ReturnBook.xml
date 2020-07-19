@@ -2,8 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.springboot.dao.ReturnBookDao">
 
-  <update id="ReturnBook" parameterType="java.lang.String">
+   <update id="ReturnBook" parameterType="java.lang.String">
     update t_book set quantity=quantity+1 where book_id = #{bookId};
     update t_rental set return_datetime=now() where book_id = #{bookId} and user_id = #{userId};
   </update>
+  <resultMap id="BookLogMap" type="com.springboot.entity.BookLog">
+        <result column="user_id" property="userId" />
+        <result column="book_id" property="bookId" />
+        <result column="rental_datetime" property="rentalDatetime" />
+        <result column="return_datetime" property="returnDatetime" />
+   </resultMap>
+   <select id="getReturnBook" resultMap="BookLogMap">
+        SELECT * FROM t_rental WHERE user_id=#{userId} and book_id=#{bookId}
+   </select>
 </mapper>

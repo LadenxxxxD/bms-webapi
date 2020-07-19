@@ -21,7 +21,7 @@ public class ReturnBookController {
 
 	@PostMapping("/returnbook")
 	@ResponseBody
-	public boolean login(@RequestBody ReturnBook returnBook, HttpServletRequest request) {
+	public boolean returnbook(@RequestBody ReturnBook returnBook) {
 
 		boolean result = rbService.returnBookCheck(returnBook.getUserId(), returnBook.getBookId());
 		if (result) {

@@ -31,23 +31,25 @@ public class LoginController {
 		String password = obj.get("password").toString();
 		String authority = service.checkPassword(userName, password);
 		String token = "";
-		int userId = service.getUserId(userName);
-		// authority!=null说明用户名密码正确，可以生成token
-		// if(authority != null) {
-		// 根据userId和名字生成Token
-		System.out.println("userId:" + userId);
-		token = JWTUtil.createToken(userId, userName, 1);
-		Claims a = JWTUtil.parseToken(token, "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=");
+		if (authority != null) {
+			int userId = service.getUserId(userName);
+			// authority!=null说明用户名密码正确，可以生成token
+			// if(authority != null) {
+			// 根据userId和名字生成Token
+			// System.out.println("LoginController：userId:" + userId);
+			token = JWTUtil.createToken(userId, userName, 1);
+		}
 		return "{\"authority\":\"" + authority + "\",\"token\":\"" + token + "\"}";
 	}
-
-	@PostMapping(value = "/test", produces = "application/json;charset = UTF-8")
-	@ResponseBody
-	public String test(@RequestBody String body, HttpServletRequest req) {
-		JSONObject obj = JSONObject.fromObject(body);
-		String token = obj.get("token").toString();
-		System.out.println("token:" + token);
-		Claims claims = JWTUtil.parseToken(token, "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=");
-		return "";
-	}
+	//
+	// @PostMapping(value = "/test", produces = "application/json;charset = UTF-8")
+	// @ResponseBody
+	// public String test(@RequestBody String body, HttpServletRequest req) {
+	// JSONObject obj = JSONObject.fromObject(body);
+	// String token = obj.get("token").toString();
+	// System.out.println("token:" + token);
+	// Claims claims = JWTUtil.parseToken(token,
+	// "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=");
+	// return "";
+	// }
 }

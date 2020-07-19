@@ -27,8 +27,11 @@ public class RegisterController {
 
 	@PostMapping(value = "/register")
 	@ResponseBody
-	public User register(HttpServletRequest request) {
+	public boolean register(HttpServletRequest request) {
 
+		if (request == null) {
+			return false;
+		}
 		HttpRequestUtil tool = new HttpRequestUtil();
 		Map<String, String> params = new HashMap<>();
 		params = tool.commonHttpRequestParamConvert(request);
@@ -37,14 +40,14 @@ public class RegisterController {
 		String username = params.get("user_name");
 		User user = new User();
 		user.setUsername(username);
-		;
+
 		String password = params.get("password");
 		user.setPassword(password);
 		String email = params.get("email");
 		user.setEmail(email);
 		String birthday = params.get("birthday");
 		LocalDate birthData = LocalDate.parse("2019-12-05", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		;
+
 		user.setBirthday(birthData);
 		String sex = params.get("sex");
 		user.setSex(sex);
@@ -55,7 +58,8 @@ public class RegisterController {
 		String comment = params.get("comment");
 		user.setComment(comment);
 		//// ������
-		String authority = "authority";
+		String authority = params.get("authority");
+		;
 		user.setAuthority(authority);
 		String description = params.get("description");
 		user.setDescription(description);
@@ -67,6 +71,24 @@ public class RegisterController {
 		userService.addUser(user);
 		// ResponseResult result = new
 		// ResponseResult(ResponseCode.SUCCESS.getCode(),ResponseCode.SUCCESS.getMsg(),user);
-		return user;
+		// return user;
+		return true;
 	}
+
+	@PostMapping(value = "/checkUserThere")
+	@ResponseBody
+	public boolean checkuserThere(HttpServletRequest request) {
+		HttpRequestUtil tool = new HttpRequestUtil();
+		Map<String, String> params = new HashMap<>();
+		params = tool.commonHttpRequestParamConvert(request);
+		System.out.println(params);
+		String userName = params.get("userName");
+		// System.out.println(userName);
+		boolean result = userService.checkUserThere(userName);
+		if (result) {
+			return result;
+		}
+		return false;
+	}
+
 }
