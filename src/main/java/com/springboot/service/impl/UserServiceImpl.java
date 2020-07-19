@@ -46,10 +46,12 @@ public class UserServiceImpl implements UserService {
 				user.getDescription(), user.getAuthority(), user.getEmail(), user.getBirthday(), user.getSex(),
 				user.getGrade(), user.getInterest(), user.getComment());
 		if (result) {
-			System.out.println("add User sucess------------------------------------------------------------------");
+			// System.out.println("add User
+			// sucess------------------------------------------------------------------");
 			return true;
 		}
-		System.out.println("add User fail------------------------------------------------------------------");
+		// System.out.println("add User
+		// fail------------------------------------------------------------------");
 		return false;
 	}
 
@@ -61,13 +63,26 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean checkUserThere(String userName) {
-		// TODO Auto-generated method stub
 		user = userDao.findByUsername(userName);
 		if (user != null) {
 			String authority = user.getAuthority();
 			return true;
 		}
 
+		return false;
+	}
+
+	@Override
+	public boolean registerLog(int userId, String time) {
+		boolean result = userDao.registerLogById(userId, time);
+		if (result) {
+			// System.out.println("add log
+			// sucess------------------------------------------------------------------");
+			return true;
+		} else {
+			// System.out.println("add log
+			// fail------------------------------------------------------------------");
+		}
 		return false;
 	}
 

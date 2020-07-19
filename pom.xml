@@ -22,8 +22,18 @@
 		<jjwt.version>0.7.0</jjwt.version>
         <joda-time.version>2.9.6</joda-time.version>
 	</properties>
+	
+		
 
 	<dependencies>
+	
+	<!-- aop -->
+		<dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		
+		
 	<dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>

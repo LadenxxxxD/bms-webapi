@@ -20,4 +20,7 @@ public interface UserService {
 	public boolean updateUserInfo(User user);
 
 	public boolean checkUserThere(String userName);
+
+	boolean registerLog(int userId, String time);
+	
 }

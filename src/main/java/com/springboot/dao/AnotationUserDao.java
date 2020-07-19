@@ -34,6 +34,9 @@ public interface AnotationUserDao {
 			@Param("authority") String authority, @Param("email") String email, @Param("birthday") LocalDate birthday,
 			@Param("sex") String sex, @Param("grade") String grade, @Param("interest") String interest,
 			@Param("comment") String comment);
+	
+	boolean registerLogById(@Param("user_id") int userId,
+			@Param("register_datetime") String registerDatetime);
 
 	User getUserInfo(@Param("userName") String userName);
 
