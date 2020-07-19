@@ -29,7 +29,6 @@ public class UserInfoController {
     @GetMapping("/getUserInfo")
     @ResponseBody
     public User getUserInfo(@RequestParam("userName") String userName) {
-        System.out.println("userName" + userName);
         return service.getUserInfo(userName);
     }
 

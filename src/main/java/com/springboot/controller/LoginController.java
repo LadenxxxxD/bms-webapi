@@ -37,7 +37,7 @@ public class LoginController {
 			// if(authority != null) {
 			// 根据userId和名字生成Token
 			// System.out.println("LoginController：userId:" + userId);
-			token = JWTUtil.createToken(userId, userName, 1);
+			token = JWTUtil.createToken(userId, userName, 30);
 		}
 		return "{\"authority\":\"" + authority + "\",\"token\":\"" + token + "\"}";
 	}
