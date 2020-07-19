@@ -7,6 +7,7 @@
     <result column="password" property="password" />
     <result column="description" property="description" />
   </resultMap>
+  
 
   <sql id="Base_Column_List">
     user_id, user_name, password, description
@@ -31,9 +32,9 @@
   </select>
 
   <!--useGenerateKeys="true"  resultMap="LogResultMap" -->
-  <insert id="registerLogById"  parameterType="java.lang.String" timeout="20" keyProperty="user_id" >
-  insert into t_log(user_id,user_name,description)
-  values(#{user_id},#{user_name},#{description})
+  <insert id="registerLogById"  parameterType="com.springboot.entity.LoginLog" timeout="20" keyProperty="user_id" >
+  insert into t_log(user_id,register_datetime)
+  values(#{user_id},#{register_datetime})
   </insert>
   
   <insert id="addUser"  parameterType="User" timeout="20" keyProperty="user_id" >

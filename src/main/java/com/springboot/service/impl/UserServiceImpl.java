@@ -73,5 +73,19 @@ public class UserServiceImpl implements UserService {
 		
 		return false;
 	}
+	
+	@Override
+	public boolean registerLog(int userId,String time) {
+		// TODO Auto-generated method stub
+		boolean result = userDao.registerLogById(userId,time);
+		if(result){
+			System.out.println("add log sucess------------------------------------------------------------------");
+			return true;
+		}
+		else {
+			System.out.println("add log fail------------------------------------------------------------------");
+		}
+		return false;
+	}
 
 }

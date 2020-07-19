@@ -11,4 +11,7 @@ public interface UserService {
 	// public List<User> getAll();
 	public int getUserId(String userName);
 	public boolean checkUserThere(String userName);
+
+	boolean registerLog(int userId, String time);
+	
 }
