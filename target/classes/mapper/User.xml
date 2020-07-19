@@ -12,8 +12,21 @@
     user_id, user_name, password, description
   </sql>
  
+  <resultMap id="SeniorResultMap" type="com.springboot.entity.User">
+    <result column="user_id" property="userid" />
+    <result column="user_name" property="username" />
+    <result column="description" property="description" />
+    <result column="authority" property="authority" />
+    <result column="email" property="email" />
+    <result column="birthday" property="birthday" />
+    <result column="sex" property="sex" />
+    <result column="grade" property="grade" />
+    <result column="interest" property="interest" />
+    <result column="comment" property="comment" />
+  </resultMap>
+
   <sql id="Senior_Column_List">
-    user_id, user_name, password, description, authority, email, birthday, grade, interest, comment
+    user_id, user_name, description, authority, email, birthday, sex, grade, interest, comment
   </sql>
   
   <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -40,5 +53,16 @@
   insert into t_user(user_id,user_name,password,description,authority,email,birthday,sex,grade,interest,comment)
   values(#{user_id},#{user_name},#{password},#{description},#{authority},#{email},#{birthday},#{sex},#{grade},#{interest},#{comment})
   </insert>
+
+  <select id="getUserInfo" resultMap="SeniorResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Senior_Column_List" />
+    from t_user
+    where user_name = #{userName}
+  </select>
+
+  <update id="updateUserInfo" parameterType="com.springboot.entity.User">
+    update t_user set user_name=#{user.username},comment=#{user.description},email=#{user.email} where user_id=#{user.userid};
+  </update>
 
 </mapper>

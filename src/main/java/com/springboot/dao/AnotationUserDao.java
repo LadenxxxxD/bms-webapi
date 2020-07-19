@@ -23,7 +23,9 @@ public interface AnotationUserDao {
 	// @Result(property = "description", column = "description"),
 	// })
 	User findById(@Param("userid") String userid);
+
 	User findByUsername(@Param("userName") String userName);
+
 	boolean registerLogById(@Param("user_id") String userid, @Param("user_name") String username,
 			@Param("description") String description);
 
@@ -32,6 +34,10 @@ public interface AnotationUserDao {
 			@Param("authority") String authority, @Param("email") String email, @Param("birthday") LocalDate birthday,
 			@Param("sex") String sex, @Param("grade") String grade, @Param("interest") String interest,
 			@Param("comment") String comment);
+
+	User getUserInfo(@Param("userName") String userName);
+
+	boolean updateUserInfo(@Param("user") User user);
 
 	// /**
 	// *

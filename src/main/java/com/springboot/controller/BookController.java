@@ -86,14 +86,12 @@ public class BookController {
 		return bookService.deleteBook(bookId);
 	}
 
-	// TODO 新增图书
 	@PostMapping(value = "/addBook")
 	@ResponseBody
 	public boolean uploadBookInfo(@RequestBody Book book) {
 		return bookService.addBook(book);
 	}
 
-	// TODO 上传图片
 	// 前端需要的Json样例：
 	// {
 	// "name": "xxx.png",

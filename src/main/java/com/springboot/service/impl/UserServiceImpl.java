@@ -53,11 +53,21 @@ public class UserServiceImpl implements UserService {
 		System.out.println("add User fail------------------------------------------------------------------");
 		return false;
 	}
-	
+
 	@Override
 	public int getUserId(String userName) {
 		int userId = userDao.findByUsername(userName).getUserid();
 		return userId;
+	}
+
+	@Override
+	public User getUserInfo(String userName) {
+		return this.userDao.getUserInfo(userName);
+	}
+
+	@Override
+	public boolean updateUserInfo(User user) {
+		return this.userDao.updateUserInfo(user);
 	}
 
 }

@@ -8,6 +8,15 @@ public interface UserService {
 	public User getUser(String userId);
 
 	public boolean addUser(User user);
+
 	// public List<User> getAll();
+
 	public int getUserId(String userName);
+
+	// public User getUserInfo(String userName);
+
+	public User getUserInfo(String userName);
+
+	public boolean updateUserInfo(User user);
+
 }

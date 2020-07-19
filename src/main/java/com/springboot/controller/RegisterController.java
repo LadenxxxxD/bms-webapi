@@ -69,5 +69,4 @@ public class RegisterController {
 		// ResponseResult(ResponseCode.SUCCESS.getCode(),ResponseCode.SUCCESS.getMsg(),user);
 		return user;
 	}
-
 }
