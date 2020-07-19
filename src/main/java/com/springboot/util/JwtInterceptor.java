@@ -19,9 +19,8 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// 获取请求头信息authorization信息
-		String b = request.getParameter("b");
 		String a = request.getHeader("a");
-		System.out.println("aaaaaaaaaaaaaaaaaa:" + a);
+//		System.out.println("aaaaaaaaaaaaaaaaaa:" + a);
 		Claims claims = JWTUtil.parseToken(a, "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=");
 		if (claims == null) {
 			// 若判断是322则跳转至登录页面

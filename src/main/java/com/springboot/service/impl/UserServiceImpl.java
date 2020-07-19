@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		user = userDao.findByUsername(userName);
 		if (user != null && password.equals(user.getPassword())) {
 			String authority = user.getAuthority();
-			System.out.println(authority);
+//			System.out.println(authority);
 			return authority;
 		}
 		return null;
@@ -47,10 +47,10 @@ public class UserServiceImpl implements UserService {
 				user.getDescription(), user.getAuthority(), user.getEmail(), user.getBirthday(), user.getSex(),
 				user.getGrade(), user.getInterest(), user.getComment());
 		if (result) {
-			System.out.println("add User sucess------------------------------------------------------------------");
+			//System.out.println("add User sucess------------------------------------------------------------------");
 			return true;
 		}
-		System.out.println("add User fail------------------------------------------------------------------");
+		//System.out.println("add User fail------------------------------------------------------------------");
 		return false;
 	}
 	
@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
 	public boolean checkUserThere(String userName) {
 		// TODO Auto-generated method stub
 		user = userDao.findByUsername(userName);
-		System.out.println(userName);
-		System.out.println(user);
+		//System.out.println(userName);
+		//System.out.println(user);
 		if (user != null) {
 			String authority = user.getAuthority();
 			return true;
@@ -79,11 +79,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		boolean result = userDao.registerLogById(userId,time);
 		if(result){
-			System.out.println("add log sucess------------------------------------------------------------------");
+		//	System.out.println("add log sucess------------------------------------------------------------------");
 			return true;
 		}
 		else {
-			System.out.println("add log fail------------------------------------------------------------------");
+		//	System.out.println("add log fail------------------------------------------------------------------");
 		}
 		return false;
 	}
